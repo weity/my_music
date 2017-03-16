@@ -1,0 +1,27 @@
+{
+  "name": "my_music",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jobin",
+  "license": "ISC",
+  "dependencies": {
+    "cclog": "^0.4.1",
+    "cheerio": "^0.22.0",
+    "co-request": "^1.0.0",
+    "koa": "^2.1.0",
+    "koa-middlewares": "^6.0.0",
+    "koa-mount": "^2.0.0",
+    "koa-router": "^5.4.0",
+    "koa-safe-jsonp": "^0.3.1",
+    "koa-session": "^5.0.0",
+    "koa-views": "^6.0.1",
+    "lru-cache": "^4.0.2",
+    "moment": "^2.17.1",
+    "path": "^0.12.7",
+    "superagent": "^3.5.0"
+  }
+}

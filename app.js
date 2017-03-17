@@ -75,13 +75,14 @@ middlewares.ejs(app, {
     debug: false
 });
 
+var rSch = require('./resource/search')
 var rWyy = require('./resource/wangyiyun/r_wyy');
 var rKg = require('./resource/kugou/r_kg');
 
 /**
  * 启动app,进行路由包装
  */
-// app.use(middlewares.router(app));
+app.use(mount("/", rSch.middleware()))
 app.use(mount("/", rWyy.middleware()))
 app.use(mount("/", rKg.middleware()))
 

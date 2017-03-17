@@ -85,4 +85,23 @@ app.get('/kg/select/detail/:id',function *(next){
     this.response.body = result;
 })
 
+/**
+ * 通过hash值获得audio源文件
+ */
+app.get('/kg/select/detail/songs/:id', function *(next) {
+    var data = this.params.id
+    var arr = data.split('|')
+    var url = "http://www.kugou.com/yy/index.php?r=play/getdata&hash=" + arr[0]
+
+    var result = yield request({
+        uri:url,
+        json:true
+    })
+
+    if(result.statusCode == '200'){
+        result = result.body.data
+    }
+    this.response.body = result
+})
+
 module.exports = app

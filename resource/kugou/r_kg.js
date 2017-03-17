@@ -18,15 +18,71 @@ const Router = require('koa-router')
 const app = new Router()
 const request = require("co-request")
 const cache = require("../../common/cache")
-const httpClient = require('../../service/kgService')
+const cheerio = require('cheerio')
+const util = require('../../common/dUtil')
+
 
 /**
- * 首页
+ * 酷狗精选歌单
  */
-app.get('/kg/index', function *(next) {
+app.get('/kg/select', function *(next) {
     var reqUrl = "http://www.kugou.com/"
-    var result = yield httpClient.doRequest(reqUrl)
+
+    var result = yield util.query(reqUrl)
+
+    if (result.code == '200') {
+        var res = [];
+
+        var dom = result.data.text
+        var $ = cheerio.load(dom, {decodeEntities: false})
+
+        $('.selectSongList').find('.itemContent').children().each(function (index, element) {
+            //链接地址
+            var link = $(element).find('.Cover').find('a')
+            //cover歌单封面
+            var cover = $(element).find('img').attr('src')
+            //其它信息
+            var item = {
+                id: $(element).find('.playBtn').attr('data-id'),
+                title: $(element).find('.cptB').find('.songListName').html(),
+                href: link.attr('href'),
+                listSinger: eval("'" + $(element).find('div').has('.cptB').find('.songListSinger').html() + "'"),
+                cover: cover
+            };
+            res.push(item)
+        })
+        result = res
+    }
     this.response.body = result
+})
+
+app.get('/kg/select/detail/:id',function *(next){
+    var id = this.params.id
+    var url = "http://www.kugou.com/yy/special/single/" + id + ".html"
+
+    var result = yield  util.query(url)
+
+    if(result.code == '200'){
+        var dom = result.data.text
+        var $ = cheerio.load(dom,{decodeEntities:false})
+
+        var listTitle = $('#songs').find('strong').html()
+        var list = $('#songs').find('ul').children()
+        var res = []
+        list.each(function (index, item) {
+            var audio = {
+                name:$(item).find('a').attr('title'),
+                data:$(item).find('a').attr('data')
+            }
+            res.push(audio)
+        })
+        var obj = {}
+        obj.listTitle = listTitle
+        obj.data = res
+        result = obj
+    }
+
+    this.response.body = result;
 })
 
 module.exports = app

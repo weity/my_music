@@ -10,13 +10,25 @@
 const Router = require('koa-router')
 const app = new Router()
 const request = require("co-request")
-const cache = require("../../common/cache")
-const util = require("../../common/dUtil")
+const cache = require("../common/cache")
+const util = require("../common/dUtil")
+const service = require("../service/searchService")
 const cheerio = require('cheerio')
+const constant = require("../common/constant")
 
-app.get('search',function *(next) {
-
+app.get('/search',function *(next) {
+    var name = this.query.musicName
+    var query = {
+        key:name,
+        type: type || '',
+        page: pageNum || 0
+    }
+    if(!!name){
+        service.query(query,constant.CrawlersUrl)
+    }
+    yield this.render("/index",{})
 })
+
 
 
 

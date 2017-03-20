@@ -26,8 +26,8 @@ searchService.analysisParams = function (obj,urlObj) {
     url = urlObj.search.wangyi.url + "type=1002&s=" + val
     url = urlObj.search.kugou.url + "searchType=song&searchKeyWord=" + val
     url = urlObj.search.qq.url + "page=1&searchid=1&remoteplace=txt.yqq.top&t=song&w=" + val
-    url = urlObj.search.kuwo.url + "type=all&catalog=yueku20177&key=" + val*/
-    return url
+    url = urlObj.search.kuwo.url + "type=all&catalog=yueku20177&key=" + val
+    return url*/
 }
 
 searchService.queryUrl = function (paramUrl) {

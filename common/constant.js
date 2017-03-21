@@ -8,11 +8,48 @@ module.exports = {
     BaseParams:{
         search:{
             all:'all', //所有
-            song:'song',//单曲
-            special:'special',//歌单
-            mv:'mv',//mv
-            album:'album',//专辑
-            lyric:'lyric'//歌词
+            song:{
+                wangyi:"1",
+                kugou:"song",
+                qq:"song",
+                kuwo:"music"
+            },//单曲
+            special:{
+                wangyi:"1000",
+                kugou:"special",
+                qq:"playlist",
+                kuwo:"playlist"
+            },//歌单
+            mv:{
+                wangyi:"1004",
+                kugou:"mv",
+                qq:"mv",
+                kuwo:"mv"
+            },//mv
+            album:{
+                wangyi:"10",
+                kugou:"",
+                qq:"album",
+                kuwo:"album"
+            },//专辑
+            lyric:{
+                wangyi:"1006",
+                kugou:"",
+                qq:"lyric",
+                kuwo:"lyric"
+            },//歌词
+            anchor:{
+                wangyi:"1009",
+                kugou:"",
+                qq:"",
+                kuwo:""
+            },//主播
+            user:{
+                wangyi:"1002",
+                kugou:"",
+                qq:"",
+                kuwo:""
+            },//用户
         }
     },
     CrawlersUrl:{

@@ -17,7 +17,9 @@ const cheerio = require('cheerio')
 const constant = require("../common/constant")
 
 app.get('/search',function *(next) {
-    var name = this.query.musicName
+    var name = this.query.key
+    var type = this.query.type
+    var pageNum = this.query.pageNum || 1
     var query = {
         key:name,
         type: type || '',
